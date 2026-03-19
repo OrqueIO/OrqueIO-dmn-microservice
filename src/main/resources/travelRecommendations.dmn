@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="travelDecisions" name="Travel Recommendations" namespace="http://camunda.org/schema/1.0/dmn">
+
+  <decision id="travel" name="Travel Recommendation" camunda:historyTimeToLive="P180D">
+    <decisionTable id="travelTable" hitPolicy="COLLECT">
+      <input id="input_season" label="Season">
+        <inputExpression id="expr_season" typeRef="string">
+          <text>season</text>
+        </inputExpression>
+      </input>
+      <input id="input_budget" label="Budget">
+        <inputExpression id="expr_budget" typeRef="string">
+          <text>budget</text>
+        </inputExpression>
+      </input>
+      <input id="input_travelers" label="Number of travelers">
+        <inputExpression id="expr_travelers" typeRef="integer">
+          <text>nbTravelers</text>
+        </inputExpression>
+      </input>
+      <input id="input_children" label="With children">
+        <inputExpression id="expr_children" typeRef="boolean">
+          <text>withChildren</text>
+        </inputExpression>
+      </input>
+      <output id="output_destination" label="Destination" name="destination" typeRef="string" />
+      <output id="output_activity" label="Activity" name="activity" typeRef="string" />
+
+      <!-- Summer Low: Marrakech -->
+      <rule id="rule-1">
+        <description>Sun and culture on a budget</description>
+        <inputEntry id="ue_1a"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_1b"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_1c"><text></text></inputEntry>
+        <inputEntry id="ue_1d"><text></text></inputEntry>
+        <outputEntry id="le_1a"><text>"Marrakech"</text></outputEntry>
+        <outputEntry id="le_1b"><text>"Explore the Souks"</text></outputEntry>
+      </rule>
+      <rule id="rule-1-local">
+        <inputEntry id="ue_1la"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_1lb"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_1lc"><text></text></inputEntry>
+        <inputEntry id="ue_1ld"><text></text></inputEntry>
+        <outputEntry id="le_1la"><text>"Marrakech"</text></outputEntry>
+        <outputEntry id="le_1lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-1-kids">
+        <description>Kid-friendly</description>
+        <inputEntry id="ue_1ka"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_1kb"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_1kc"><text></text></inputEntry>
+        <inputEntry id="ue_1kd"><text>true</text></inputEntry>
+        <outputEntry id="le_1ka"><text>"Marrakech"</text></outputEntry>
+        <outputEntry id="le_1kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Summer Medium <=4: Santorini -->
+      <rule id="rule-2">
+        <description>Greek islands for couples or small groups</description>
+        <inputEntry id="ue_2a"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_2b"><text>"Medium"</text></inputEntry>
+        <inputEntry id="ue_2c"><text>&lt;= 4</text></inputEntry>
+        <inputEntry id="ue_2d"><text></text></inputEntry>
+        <outputEntry id="le_2a"><text>"Santorini"</text></outputEntry>
+        <outputEntry id="le_2b"><text>"Boat Cruise"</text></outputEntry>
+      </rule>
+      <rule id="rule-2-local">
+        <inputEntry id="ue_2la"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_2lb"><text>"Medium"</text></inputEntry>
+        <inputEntry id="ue_2lc"><text>&lt;= 4</text></inputEntry>
+        <inputEntry id="ue_2ld"><text></text></inputEntry>
+        <outputEntry id="le_2la"><text>"Santorini"</text></outputEntry>
+        <outputEntry id="le_2lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-2-kids">
+        <inputEntry id="ue_2ka"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_2kb"><text>"Medium"</text></inputEntry>
+        <inputEntry id="ue_2kc"><text>&lt;= 4</text></inputEntry>
+        <inputEntry id="ue_2kd"><text>true</text></inputEntry>
+        <outputEntry id="le_2ka"><text>"Santorini"</text></outputEntry>
+        <outputEntry id="le_2kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Summer High: Maldives -->
+      <rule id="rule-3">
+        <description>Luxury summer getaway</description>
+        <inputEntry id="ue_3a"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_3b"><text>"High"</text></inputEntry>
+        <inputEntry id="ue_3c"><text></text></inputEntry>
+        <inputEntry id="ue_3d"><text></text></inputEntry>
+        <outputEntry id="le_3a"><text>"Maldives"</text></outputEntry>
+        <outputEntry id="le_3b"><text>"Scuba Diving"</text></outputEntry>
+      </rule>
+      <rule id="rule-3-local">
+        <inputEntry id="ue_3la"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_3lb"><text>"High"</text></inputEntry>
+        <inputEntry id="ue_3lc"><text></text></inputEntry>
+        <inputEntry id="ue_3ld"><text></text></inputEntry>
+        <outputEntry id="le_3la"><text>"Maldives"</text></outputEntry>
+        <outputEntry id="le_3lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-3-kids">
+        <inputEntry id="ue_3ka"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_3kb"><text>"High"</text></inputEntry>
+        <inputEntry id="ue_3kc"><text></text></inputEntry>
+        <inputEntry id="ue_3kd"><text>true</text></inputEntry>
+        <outputEntry id="le_3ka"><text>"Maldives"</text></outputEntry>
+        <outputEntry id="le_3kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Summer Medium >4: Antalya -->
+      <rule id="rule-4">
+        <description>Large group summer trip</description>
+        <inputEntry id="ue_4a"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_4b"><text>"Medium"</text></inputEntry>
+        <inputEntry id="ue_4c"><text>&gt; 4</text></inputEntry>
+        <inputEntry id="ue_4d"><text></text></inputEntry>
+        <outputEntry id="le_4a"><text>"Antalya"</text></outputEntry>
+        <outputEntry id="le_4b"><text>"Pamukkale Day Trip"</text></outputEntry>
+      </rule>
+      <rule id="rule-4-local">
+        <inputEntry id="ue_4la"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_4lb"><text>"Medium"</text></inputEntry>
+        <inputEntry id="ue_4lc"><text>&gt; 4</text></inputEntry>
+        <inputEntry id="ue_4ld"><text></text></inputEntry>
+        <outputEntry id="le_4la"><text>"Antalya"</text></outputEntry>
+        <outputEntry id="le_4lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-4-kids">
+        <inputEntry id="ue_4ka"><text>"Summer"</text></inputEntry>
+        <inputEntry id="ue_4kb"><text>"Medium"</text></inputEntry>
+        <inputEntry id="ue_4kc"><text>&gt; 4</text></inputEntry>
+        <inputEntry id="ue_4kd"><text>true</text></inputEntry>
+        <outputEntry id="le_4ka"><text>"Antalya"</text></outputEntry>
+        <outputEntry id="le_4kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Winter Low: Istanbul -->
+      <rule id="rule-5">
+        <description>Affordable winter escape</description>
+        <inputEntry id="ue_5a"><text>"Winter"</text></inputEntry>
+        <inputEntry id="ue_5b"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_5c"><text></text></inputEntry>
+        <inputEntry id="ue_5d"><text></text></inputEntry>
+        <outputEntry id="le_5a"><text>"Istanbul"</text></outputEntry>
+        <outputEntry id="le_5b"><text>"Hagia Sophia and Grand Bazaar"</text></outputEntry>
+      </rule>
+      <rule id="rule-5-local">
+        <inputEntry id="ue_5la"><text>"Winter"</text></inputEntry>
+        <inputEntry id="ue_5lb"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_5lc"><text></text></inputEntry>
+        <inputEntry id="ue_5ld"><text></text></inputEntry>
+        <outputEntry id="le_5la"><text>"Istanbul"</text></outputEntry>
+        <outputEntry id="le_5lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-5-kids">
+        <inputEntry id="ue_5ka"><text>"Winter"</text></inputEntry>
+        <inputEntry id="ue_5kb"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_5kc"><text></text></inputEntry>
+        <inputEntry id="ue_5kd"><text>true</text></inputEntry>
+        <outputEntry id="le_5ka"><text>"Istanbul"</text></outputEntry>
+        <outputEntry id="le_5kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Winter Medium/High <=4: Swiss Alps -->
+      <rule id="rule-6">
+        <description>Skiing in a small group</description>
+        <inputEntry id="ue_6a"><text>"Winter"</text></inputEntry>
+        <inputEntry id="ue_6b"><text>"Medium","High"</text></inputEntry>
+        <inputEntry id="ue_6c"><text>&lt;= 4</text></inputEntry>
+        <inputEntry id="ue_6d"><text></text></inputEntry>
+        <outputEntry id="le_6a"><text>"Swiss Alps"</text></outputEntry>
+        <outputEntry id="le_6b"><text>"Skiing and Hiking"</text></outputEntry>
+      </rule>
+      <rule id="rule-6-local">
+        <inputEntry id="ue_6la"><text>"Winter"</text></inputEntry>
+        <inputEntry id="ue_6lb"><text>"Medium","High"</text></inputEntry>
+        <inputEntry id="ue_6lc"><text>&lt;= 4</text></inputEntry>
+        <inputEntry id="ue_6ld"><text></text></inputEntry>
+        <outputEntry id="le_6la"><text>"Swiss Alps"</text></outputEntry>
+        <outputEntry id="le_6lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-6-kids">
+        <inputEntry id="ue_6ka"><text>"Winter"</text></inputEntry>
+        <inputEntry id="ue_6kb"><text>"Medium","High"</text></inputEntry>
+        <inputEntry id="ue_6kc"><text>&lt;= 4</text></inputEntry>
+        <inputEntry id="ue_6kd"><text>true</text></inputEntry>
+        <outputEntry id="le_6ka"><text>"Swiss Alps"</text></outputEntry>
+        <outputEntry id="le_6kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Winter Medium/High >4: Lapland -->
+      <rule id="rule-7">
+        <description>Large group winter adventure</description>
+        <inputEntry id="ue_7a"><text>"Winter"</text></inputEntry>
+        <inputEntry id="ue_7b"><text>"Medium","High"</text></inputEntry>
+        <inputEntry id="ue_7c"><text>&gt; 4</text></inputEntry>
+        <inputEntry id="ue_7d"><text></text></inputEntry>
+        <outputEntry id="le_7a"><text>"Lapland"</text></outputEntry>
+        <outputEntry id="le_7b"><text>"Snowmobile Safari and Northern Lights"</text></outputEntry>
+      </rule>
+      <rule id="rule-7-local">
+        <inputEntry id="ue_7la"><text>"Winter"</text></inputEntry>
+        <inputEntry id="ue_7lb"><text>"Medium","High"</text></inputEntry>
+        <inputEntry id="ue_7lc"><text>&gt; 4</text></inputEntry>
+        <inputEntry id="ue_7ld"><text></text></inputEntry>
+        <outputEntry id="le_7la"><text>"Lapland"</text></outputEntry>
+        <outputEntry id="le_7lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-7-kids">
+        <inputEntry id="ue_7ka"><text>"Winter"</text></inputEntry>
+        <inputEntry id="ue_7kb"><text>"Medium","High"</text></inputEntry>
+        <inputEntry id="ue_7kc"><text>&gt; 4</text></inputEntry>
+        <inputEntry id="ue_7kd"><text>true</text></inputEntry>
+        <outputEntry id="le_7ka"><text>"Lapland"</text></outputEntry>
+        <outputEntry id="le_7kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Spring Low: Lisbon -->
+      <rule id="rule-8">
+        <description>Spring on a budget</description>
+        <inputEntry id="ue_8a"><text>"Spring"</text></inputEntry>
+        <inputEntry id="ue_8b"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_8c"><text></text></inputEntry>
+        <inputEntry id="ue_8d"><text></text></inputEntry>
+        <outputEntry id="le_8a"><text>"Lisbon"</text></outputEntry>
+        <outputEntry id="le_8b"><text>"Tram 28 Tour and Pasteis de Belem"</text></outputEntry>
+      </rule>
+      <rule id="rule-8-local">
+        <inputEntry id="ue_8la"><text>"Spring"</text></inputEntry>
+        <inputEntry id="ue_8lb"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_8lc"><text></text></inputEntry>
+        <inputEntry id="ue_8ld"><text></text></inputEntry>
+        <outputEntry id="le_8la"><text>"Lisbon"</text></outputEntry>
+        <outputEntry id="le_8lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-8-kids">
+        <inputEntry id="ue_8ka"><text>"Spring"</text></inputEntry>
+        <inputEntry id="ue_8kb"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_8kc"><text></text></inputEntry>
+        <inputEntry id="ue_8kd"><text>true</text></inputEntry>
+        <outputEntry id="le_8ka"><text>"Lisbon"</text></outputEntry>
+        <outputEntry id="le_8kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Spring Medium/High: Kyoto -->
+      <rule id="rule-9">
+        <description>Cherry blossom season</description>
+        <inputEntry id="ue_9a"><text>"Spring"</text></inputEntry>
+        <inputEntry id="ue_9b"><text>"Medium","High"</text></inputEntry>
+        <inputEntry id="ue_9c"><text></text></inputEntry>
+        <inputEntry id="ue_9d"><text></text></inputEntry>
+        <outputEntry id="le_9a"><text>"Kyoto"</text></outputEntry>
+        <outputEntry id="le_9b"><text>"Temple Visit and Tea Ceremony"</text></outputEntry>
+      </rule>
+      <rule id="rule-9-local">
+        <inputEntry id="ue_9la"><text>"Spring"</text></inputEntry>
+        <inputEntry id="ue_9lb"><text>"Medium","High"</text></inputEntry>
+        <inputEntry id="ue_9lc"><text></text></inputEntry>
+        <inputEntry id="ue_9ld"><text></text></inputEntry>
+        <outputEntry id="le_9la"><text>"Kyoto"</text></outputEntry>
+        <outputEntry id="le_9lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-9-kids">
+        <inputEntry id="ue_9ka"><text>"Spring"</text></inputEntry>
+        <inputEntry id="ue_9kb"><text>"Medium","High"</text></inputEntry>
+        <inputEntry id="ue_9kc"><text></text></inputEntry>
+        <inputEntry id="ue_9kd"><text>true</text></inputEntry>
+        <outputEntry id="le_9ka"><text>"Kyoto"</text></outputEntry>
+        <outputEntry id="le_9kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Fall Low: Tunis -->
+      <rule id="rule-10">
+        <description>Affordable autumn trip</description>
+        <inputEntry id="ue_10a"><text>"Fall"</text></inputEntry>
+        <inputEntry id="ue_10b"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_10c"><text></text></inputEntry>
+        <inputEntry id="ue_10d"><text></text></inputEntry>
+        <outputEntry id="le_10a"><text>"Tunis"</text></outputEntry>
+        <outputEntry id="le_10b"><text>"Carthage and Sidi Bou Said Tour"</text></outputEntry>
+      </rule>
+      <rule id="rule-10-local">
+        <inputEntry id="ue_10la"><text>"Fall"</text></inputEntry>
+        <inputEntry id="ue_10lb"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_10lc"><text></text></inputEntry>
+        <inputEntry id="ue_10ld"><text></text></inputEntry>
+        <outputEntry id="le_10la"><text>"Tunis"</text></outputEntry>
+        <outputEntry id="le_10lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-10-kids">
+        <inputEntry id="ue_10ka"><text>"Fall"</text></inputEntry>
+        <inputEntry id="ue_10kb"><text>"Low"</text></inputEntry>
+        <inputEntry id="ue_10kc"><text></text></inputEntry>
+        <inputEntry id="ue_10kd"><text>true</text></inputEntry>
+        <outputEntry id="le_10ka"><text>"Tunis"</text></outputEntry>
+        <outputEntry id="le_10kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Fall Medium: Rome -->
+      <rule id="rule-11">
+        <description>Romantic autumn getaway</description>
+        <inputEntry id="ue_11a"><text>"Fall"</text></inputEntry>
+        <inputEntry id="ue_11b"><text>"Medium"</text></inputEntry>
+        <inputEntry id="ue_11c"><text></text></inputEntry>
+        <inputEntry id="ue_11d"><text></text></inputEntry>
+        <outputEntry id="le_11a"><text>"Rome"</text></outputEntry>
+        <outputEntry id="le_11b"><text>"Colosseum and Vatican"</text></outputEntry>
+      </rule>
+      <rule id="rule-11-local">
+        <inputEntry id="ue_11la"><text>"Fall"</text></inputEntry>
+        <inputEntry id="ue_11lb"><text>"Medium"</text></inputEntry>
+        <inputEntry id="ue_11lc"><text></text></inputEntry>
+        <inputEntry id="ue_11ld"><text></text></inputEntry>
+        <outputEntry id="le_11la"><text>"Rome"</text></outputEntry>
+        <outputEntry id="le_11lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-11-kids">
+        <inputEntry id="ue_11ka"><text>"Fall"</text></inputEntry>
+        <inputEntry id="ue_11kb"><text>"Medium"</text></inputEntry>
+        <inputEntry id="ue_11kc"><text></text></inputEntry>
+        <inputEntry id="ue_11kd"><text>true</text></inputEntry>
+        <outputEntry id="le_11ka"><text>"Rome"</text></outputEntry>
+        <outputEntry id="le_11kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+      <!-- Fall High: New York -->
+      <rule id="rule-12">
+        <description>Premium autumn experience</description>
+        <inputEntry id="ue_12a"><text>"Fall"</text></inputEntry>
+        <inputEntry id="ue_12b"><text>"High"</text></inputEntry>
+        <inputEntry id="ue_12c"><text></text></inputEntry>
+        <inputEntry id="ue_12d"><text></text></inputEntry>
+        <outputEntry id="le_12a"><text>"New York"</text></outputEntry>
+        <outputEntry id="le_12b"><text>"Broadway and Central Park"</text></outputEntry>
+      </rule>
+      <rule id="rule-12-local">
+        <inputEntry id="ue_12la"><text>"Fall"</text></inputEntry>
+        <inputEntry id="ue_12lb"><text>"High"</text></inputEntry>
+        <inputEntry id="ue_12lc"><text></text></inputEntry>
+        <inputEntry id="ue_12ld"><text></text></inputEntry>
+        <outputEntry id="le_12la"><text>"New York"</text></outputEntry>
+        <outputEntry id="le_12lb"><text>"Local Cuisine"</text></outputEntry>
+      </rule>
+      <rule id="rule-12-kids">
+        <inputEntry id="ue_12ka"><text>"Fall"</text></inputEntry>
+        <inputEntry id="ue_12kb"><text>"High"</text></inputEntry>
+        <inputEntry id="ue_12kc"><text></text></inputEntry>
+        <inputEntry id="ue_12kd"><text>true</text></inputEntry>
+        <outputEntry id="le_12ka"><text>"New York"</text></outputEntry>
+        <outputEntry id="le_12kb"><text>"Theme Park"</text></outputEntry>
+      </rule>
+
+    </decisionTable>
+  </decision>
+
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_travel">
+      <dmndi:DMNShape id="DMNShape_travel" dmnElementRef="travel">
+        <dc:Bounds height="80" width="180" x="200" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
