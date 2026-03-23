@@ -1,8 +1,5 @@
 package io.orqueio.bpm.getstarted.dmn;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StopWatch;
 
 @RestController
 public class TravelController {
@@ -31,7 +29,7 @@ public class TravelController {
     }
 
     @GetMapping("/travel")
-    public ResponseEntity<Map<String, Object>> recommendTravel(
+    public ResponseEntity<TravelRecommendation> recommendTravel(
             @RequestParam String season,
             @RequestParam String budget,
             @RequestParam int nbTravelers,
@@ -43,22 +41,21 @@ public class TravelController {
             .putValue("nbTravelers", nbTravelers)
             .putValue("withChildren", withChildren);
 
-        long start = System.currentTimeMillis();
+        StopWatch watch = new StopWatch();
+        watch.start();
 
         DmnDecisionTableResult result = dmnEngine.evaluateDecisionTable(travelDecision, variables);
 
-        String destination = result.getFirstResult().getEntry("destination");
-        List<Object> activities = result.collectEntries("activity");
+        watch.stop();
 
-        long elapsed = System.currentTimeMillis() - start;
+        var elapsed = watch.getTotalTimeMillis();
 
-        LOGGER.log(Level.INFO, "DMN evaluation time: {0}ms", elapsed);
+        LOGGER.log(Level.INFO, "DMN evaluation time: {0} ms", elapsed);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("destination", destination);
-        response.put("activities", activities);
-        response.put("evaluationTime", elapsed + " ms");
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(new TravelRecommendation(
+            result.getFirstResult().<String>getEntry("destination"),
+            result.<String>collectEntries("activity"),
+            elapsed + " ms"
+        ));
     }
 }

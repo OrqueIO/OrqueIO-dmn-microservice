@@ -6,14 +6,13 @@ Given a season, budget, number of travelers, and whether children are present, t
 
 ## Prerequisites
 
-* Java 25+
+* Java 21+
 * Maven 3.8+
 
 ## Setup
 
 1. Clone the repository
 2. Build and run:
-
 ```bash
 mvn spring-boot:run
 ```
@@ -36,13 +35,11 @@ Recommends a destination and activities based on input parameters.
 | `withChildren` | boolean | `true`, `false` |
 
 **Example request:**
-
 ```bash
 curl "http://localhost:8080/travel?season=Summer&budget=Medium&nbTravelers=2&withChildren=false"
 ```
 
 **Example response:**
-
 ```json
 {
   "destination": "Santorini",
@@ -79,14 +76,14 @@ Each destination has a specific activity. Two additional rules always apply:
 - **"Theme Park"** is added when `withChildren=true`
 
 ## Project Structure
-
 ```
 src/main/java/.../dmn/
-  TravelApplication.java   ← Spring Boot entry point
-  DmnConfig.java            ← DMN engine + decision parsing (singleton)
-  TravelController.java     ← REST controller (GET /travel)
+  TravelApplication.java        ← Spring Boot entry point
+  DmnConfig.java                ← DMN engine + decision parsing (singleton)
+  TravelController.java         ← REST controller (GET /travel)
+  TravelRecommendation.java     ← Response record (destination, activities, evaluationTime)
 src/main/resources/
-  travelRecommendations.dmn ← DMN decision table
+  travelRecommendations.dmn     ← DMN decision table
 pom.xml
 ```
 
@@ -94,3 +91,4 @@ pom.xml
 
 * **Spring Boot 3.5.9**
 * **OrqueIO DMN Engine 1.0.7** (standalone, no database)
+* **Java 21**

@@ -8,6 +8,7 @@ import io.orqueio.bpm.dmn.engine.DmnEngineConfiguration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 
 @Configuration
 public class DmnConfig {
@@ -20,8 +21,9 @@ public class DmnConfig {
     }
 
     @Bean
-    public DmnDecision travelDecision(DmnEngine dmnEngine) {
-        InputStream dmn = getClass().getResourceAsStream("/travelRecommendations.dmn");
+    public DmnDecision travelDecision(DmnEngine dmnEngine) throws Exception {
+        ClassPathResource resource = new ClassPathResource("travelRecommendations.dmn");
+        InputStream dmn = resource.getInputStream();
         return dmnEngine.parseDecision("travel", dmn);
     }
 }
