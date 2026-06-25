@@ -6,7 +6,7 @@ Given a season, budget, number of travelers, and whether children are present, t
 
 ## Prerequisites
 
-* Java 21+
+* Java 25
 * Maven 3.8+
 
 ## Setup
