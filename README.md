@@ -89,6 +89,6 @@ pom.xml
 
 ## Tech Stack
 
-* **Spring Boot 3.5.9**
-* **OrqueIO DMN Engine 1.0.7** (standalone, no database)
-* **Java 21**
+* **Spring Boot 4.0.6**
+* **OrqueIO DMN Engine 2.0.5** (standalone, no database)
+* **Java 25**
